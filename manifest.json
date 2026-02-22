@@ -1,7 +1,7 @@
 {
   "name": "PSEB KBC",
   "short_name": "PSEB KBC",
-  "start_url": "https://vipansaini.github.io/CSW/",
+  "start_url": "/index.html",
   "scope": "/",
   "display": "standalone",
   "background_color": "#ffffff",
