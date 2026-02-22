@@ -1,4 +1,4 @@
-function startKBC(data,title) {
+function startKBC(data, title) {
     // Create a unique ID for this KBC instance to avoid conflicts
     const kbcInstanceId = 'kbc-' + Math.random().toString(36).substr(2, 9);
     
@@ -11,7 +11,9 @@ function startKBC(data,title) {
     // Set container styles
     container.style.position = "relative";
     container.style.width = "100%";
-    container.style.minHeight = "100vh";
+    // Allow container to grow based on content, but cap at viewport height for desktop
+    container.style.minHeight = "100vh"; 
+    container.style.overflowX = "hidden"; // Prevent horizontal scroll on main container
     container.innerHTML = "<i>📥 KBC ਲੋਡ ਹੋ ਰਿਹਾ ਹੈ ...</i>";
     container.style.userSelect = "none";
     container.querySelectorAll("*").forEach(el => {
@@ -25,6 +27,7 @@ function startKBC(data,title) {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
+            -webkit-tap-highlight-color: transparent;
         }
         
         #${kbcInstanceId} {
@@ -37,63 +40,74 @@ function startKBC(data,title) {
             font-family: 'Noto Sans Gurmukhi', sans-serif;
             background: linear-gradient(135deg, #0a0e27 0%, #1a237e 100%);
             min-height: 100vh;
-            padding: 3px;
             width: 100%;
-            margin-top:10px;
-            border-radius: 12px;
-            border: 2px solid white;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 2px;
         }
 
+        /* --- MAIN LAYOUT --- */
         #${kbcInstanceId} .kbc-container {
-            border-radius: 5%;
             display: flex;
             flex-direction: row;
             width: 100%;
-            max-width: 1200px;
+            max-width: 1400px;
             margin: 0 auto;
-            gap: 10px;
+            gap: 20px;
+            align-items: flex-start;
         }
         
-        @media (max-width: 1024px) {
+        /* Tablet & Mobile: Stack vertically */
+        @media (max-width: 992px) {
             #${kbcInstanceId} .kbc-container {
                 flex-direction: column;
             }
         }
 
-        #${kbcInstanceId} .lifelines {
-            margin-top:20px;
+        /* --- GAME AREA --- */
+        #${kbcInstanceId} .game-area {
+            flex: 3;
             display: flex;
-            justify-content: space-around;
-            padding: 12px;
-            background-color: rgba(26, 35, 126, 0.8);
-            border-radius: 12px;
-            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.3), 0 4px 6px -2px rgba(0, 0, 0, 0.2);
-            border: 2px solid var(--kbc-gold);
-            margin-bottom: 20px;
+            flex-direction: column;
+            gap: 16px;
+            width: 100%;
         }
-        
-        @media (min-width: 640px) {
-            #${kbcInstanceId} .lifelines {
-                justify-content: center;
-                gap: 30px;
-            }
+
+        /* --- LIFELINES --- */
+        #${kbcInstanceId} .lifelines {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            padding: 12px;
+            background: rgba(26, 35, 126, 0.8);
+            border-radius: 50px; /* Pill shape */
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.3);
+            border: 2px solid var(--kbc-gold);
+            margin-bottom: 10px;
+            flex-wrap: wrap;
         }
 
         #${kbcInstanceId} .lifeline-btn {
-            padding: 12px;
-            background: linear-gradient(145deg, var(--kbc-blue), #0d47a1);
+            width: 50px;
+            height: 50px;
             border-radius: 50%;
+            background: linear-gradient(145deg, var(--kbc-blue), #0d47a1);
+            border: 2px ridge var(--kbc-gold);
             color: var(--kbc-gold);
-            transition: all 0.3s ease;
-            transform: scale(1);
-            width: 60px;
-            height: 60px;
             display: flex;
             align-items: center;
             justify-content: center;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
-            border: 2px ridge gold;
             cursor: pointer;
+            transition: transform 0.2s, box-shadow 0.2s;
+            touch-action: manipulation; /* Faster taps on mobile */
+        }
+        
+        @media (min-width: 768px) {
+            #${kbcInstanceId} .lifeline-btn {
+                width: 60px;
+                height: 60px;
+            }
         }
         
         #${kbcInstanceId} .lifeline-btn:hover:not(:disabled) {
@@ -103,93 +117,153 @@ function startKBC(data,title) {
             box-shadow: 0 0 15px var(--kbc-neon);
         }
 
-        #${kbcInstanceId} .game-area {
-            width: 75%;
-            display: flex;
-            flex-direction: column;
-            gap: 24px;
-        }
-        
-        @media (max-width: 1024px) {
-            #${kbcInstanceId} .game-area {
-                width: 100%;
-                order: 2;
-            }
+        #${kbcInstanceId} .lifeline-btn:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+            filter: grayscale(100%);
         }
 
+        /* --- HOT SEAT --- */
         #${kbcInstanceId} .hot-seat {
+            margin-top: 5px;
             display: flex;
             flex-direction: column;
             align-items: center;
-            justify-content: center;
-            padding: 14px;
+            padding: 15px;
             background: radial-gradient(circle at center, rgba(26, 35, 126, 0.8) 0%, rgba(10, 14, 39, 0.9) 100%);
             border-radius: 16px;
             box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
             border: 4px solid var(--kbc-gold);
             position: relative;
             overflow: hidden;
+            width: 100%;
         }
         
-        #${kbcInstanceId} .hot-seat::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background: radial-gradient(circle at center, transparent 0%, rgba(255, 204, 0, 0.1) 100%);
-            pointer-events: none;
+        /* --- TIMER --- */
+        #${kbcInstanceId} .timer-container {
+            margin-bottom: 10px;
         }
 
+        #${kbcInstanceId} .timer-label {
+            color: var(--kbc-gold);
+            font-weight: bold;
+            text-align: center;
+            font-size: 1rem;
+            margin-bottom: 1px;
+        }
+
+        #${kbcInstanceId} .timer-circle {
+            position: relative;
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            background: conic-gradient(
+                var(--kbc-neon) 0deg,
+                var(--kbc-neon) var(--timer-progress, 360deg),
+                rgba(255, 255, 255, 0.1) var(--timer-progress, 360deg)
+            );
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 0 10px rgba(0, 188, 212, 0.5);
+            margin: 0 auto;
+        }
+        
+        @media (min-width: 768px) {
+            #${kbcInstanceId} .timer-circle {
+                width: 80px;
+                height: 80px;
+            }
+        }
+
+        #${kbcInstanceId} .timer-inner {
+            position: absolute;
+            width: 85%;
+            height: 85%;
+            border-radius: 50%;
+            background-color: var(--kbc-dark);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        #${kbcInstanceId} .timer-text {
+            color: white;
+            /* Fluid font size for timer */
+            font-size: clamp(1.2rem, 2vw, 1.8rem); 
+            font-weight: bold;
+        }
+
+        /* --- QUESTION BOX --- */
         #${kbcInstanceId} .question-box {
             width: 100%;
-            padding: 24px;
+            padding: 20px;
             color: white;
             text-align: center;
             border-radius: 12px;
-            margin-bottom: 24px;
+            margin-bottom: 20px;
             background: linear-gradient(180deg, var(--kbc-blue) 0%, var(--kbc-dark) 100%);
             border: 3px solid var(--kbc-gold);
             box-shadow: 0 0 20px var(--kbc-neon), 0 0 10px var(--kbc-gold);
             animation: pulse-border 5s infinite alternate;
             position: relative;
             z-index: 1;
+            min-height: 80px; /* Prevent layout shift */
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        #${kbcInstanceId} #current-question-text {
+            /* Fluid Typography for question text */
+            font-size: clamp(1.1rem, 2.5vw, 1.5rem);
+            font-weight: bold;
+            line-height: 1.5;
+        }
+
+        /* --- OPTIONS --- */
+        #${kbcInstanceId} .options-container {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 12px;
+            width: 100%;
+        }
+        
+        /* Mobile portrait: Stack options if screen is very narrow or question is long */
+        @media (max-width: 400px) {
+            #${kbcInstanceId} .options-container {
+                grid-template-columns: 1fr;
+            }
         }
 
         #${kbcInstanceId} .option-btn {
             width: 100%;
-            padding: 16px 24px;
+            padding: 12px 16px;
             text-align: left;
             border-radius: 12px;
             color: white;
-            font-size: 1.125rem;
             font-weight: 700;
             background: linear-gradient(145deg, var(--kbc-blue), #0d47a1);
             border: 2px solid var(--kbc-gold);
-            transition: all 0.3s ease;
+            transition: all 0.2s ease;
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5);
-            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.8);
             position: relative;
             overflow: hidden;
             cursor: pointer;
+            font-size: clamp(0.9rem, 1.5vw, 1.125rem); /* Fluid text */
+            touch-action: manipulation;
+            min-height: 60px; /* Touch target height */
+            display: flex;
+            align-items: center;
         }
         
-        #${kbcInstanceId} .option-btn::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: -100%;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
-            transition: left 0.5s;
+        @media (min-width: 768px) {
+            #${kbcInstanceId} .option-btn {
+                padding: 18px 24px;
+                min-height: 70px;
+            }
         }
         
-        #${kbcInstanceId} .option-btn:hover:not([data-disabled='true'])::before {
-            left: 100%;
-        }
-
         #${kbcInstanceId} .option-btn:hover:not([data-disabled='true']) {
             background: linear-gradient(145deg, var(--kbc-neon), #0097a7);
             color: var(--kbc-dark);
@@ -201,63 +275,102 @@ function startKBC(data,title) {
             background: linear-gradient(145deg, var(--kbc-neon), #0097a7);
             color: var(--kbc-dark);
             animation: flashing 0.3s 4;
-            box-shadow: 0 0 20px var(--kbc-neon);
-            transform: scale(1.02);
+            border-color: white;
         }
 
         #${kbcInstanceId} .option-btn.correct {
             background: linear-gradient(145deg, var(--kbc-correct), #2e7d32);
             animation: flashing 0.3s 8;
-            box-shadow: 0 0 20px var(--kbc-correct);
+            border-color: #fff;
         }
 
         #${kbcInstanceId} .option-btn.wrong {
             background: linear-gradient(145deg, var(--kbc-wrong), #c62828);
-            box-shadow: 0 0 20px var(--kbc-wrong);
             animation: shake 0.5s;
+            opacity: 0.8;
         }
 
+        /* --- EXPLANATION --- */
         #${kbcInstanceId} .explanation-box {
             color: cyan;
             width: 100%;
-            background-color: rgba(26, 35, 126, 0.5);
+            background-color: rgba(26, 35, 126, 0.6);
             border-left: 4px solid var(--kbc-gold);
-            padding: 16px;
-            margin-top: 16px;
+            padding: 15px;
+            margin-top: 15px;
             border-radius: 8px;
             text-align: left;
-            max-width: 100%;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+            font-size: 0.95rem;
+            line-height: 1.4;
         }
         
         #${kbcInstanceId} .explanation-title {
             color: gold;
             font-weight: bold;
-            margin-bottom: 8px;
-            font-size: 1.1rem;
+            margin-bottom: 5px;
+            display: block;
         }
 
+        /* --- MONEY TREE (Responsive Layout) --- */
         #${kbcInstanceId} .money-tree-container {
-            margin-top:20px;
-            width: 25%;
-            padding: 16px;
+            flex: 1;
             background: linear-gradient(145deg, rgba(26, 35, 126, 0.8), rgba(10, 14, 39, 0.9));
             border-radius: 16px;
             box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.3), 0 4px 6px -2px rgba(0, 0, 0, 0.2);
             border: 2px solid var(--kbc-gold);
+            padding: 15px;
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+        }
+
+        /* Desktop: Vertical List */
+        #${kbcInstanceId} .money-tree {
+            display: flex;
+            flex-direction: column-reverse;
+            gap: 4px;
         }
         
-        @media (max-width: 1024px) {
+        /* Mobile & Tablet: Horizontal Scroll Bar */
+        @media (max-width: 992px) {
             #${kbcInstanceId} .money-tree-container {
                 width: 100%;
-                order: 1;
-                margin-bottom: 20px;
+                order: -1; /* Move to top on mobile */
+                padding: 10px;
+             //  height: auto;
+                max-height: 60px; /* Limit height */
+                flex-direction: row; /* Horizontal layout */
+                overflow-x: auto; /* Enable scroll */
+                overflow-y: hidden;
+                white-space: nowrap;
+                /* Hide scrollbar for clean look */
+                -ms-overflow-style: none; 
+                scrollbar-width: none; 
+            }
+            
+            #${kbcInstanceId} .money-tree-container::-webkit-scrollbar { 
+                display: none; 
+            }
+
+            #${kbcInstanceId} .money-tree {
+                flex-direction: row; /* Items side by side */
+                width: max-content; /* Ensure content determines width */
+                height: 100%;
+                align-items: center;
+            }
+            
+            #${kbcInstanceId} .money-item {
+                display: inline-flex;
+                margin-right: 8px;
+                padding: 8px 12px;
+                min-width: 100px;
+                justify-content: center;
+                text-align: center;
             }
         }
 
         #${kbcInstanceId} .money-item {
             padding: 8px 12px;
-            margin: 4px 0;
             transition: all 0.3s ease;
             text-align: right;
             border-radius: 8px;
@@ -265,21 +378,14 @@ function startKBC(data,title) {
             color: white;
             position: relative;
             overflow: hidden;
+            cursor: default;
         }
         
-        #${kbcInstanceId} .money-item::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 0;
-            height: 100%;
-            background: linear-gradient(90deg, transparent, rgba(255, 204, 0, 0.3), transparent);
-            transition: width 0.5s;
-        }
-        
-        #${kbcInstanceId} .money-item:hover::before {
-            width: 100%;
+        @media (min-width: 992px) {
+            #${kbcInstanceId} .money-item {
+                font-size: 1rem;
+                padding: 10px 15px;
+            }
         }
         
         #${kbcInstanceId} .money-item.current {
@@ -297,6 +403,7 @@ function startKBC(data,title) {
             border: 1px solid var(--kbc-gold);
         }
 
+        /* --- MODAL --- */
         #${kbcInstanceId}-modal {
             color:white;
             position: fixed;
@@ -304,12 +411,13 @@ function startKBC(data,title) {
             left: 0;
             right: 0;
             bottom: 0;
-            background-color: rgba(0, 0, 0, 0.8);
+            background-color: rgba(0, 0, 0, 0.85);
             display: none;
             align-items: center;
             justify-content: center;
             z-index: 9999;
             backdrop-filter: blur(5px);
+            padding: 20px;
         }
         
         #${kbcInstanceId}-modal.active {
@@ -318,48 +426,46 @@ function startKBC(data,title) {
 
         #${kbcInstanceId}-modal .modal-content {
             background: linear-gradient(145deg, var(--kbc-dark), var(--kbc-blue));
-            padding: 32px;
+            padding: 24px;
             border-radius: 16px;
+            width: 100%;
             max-width: 500px;
-            width: 90%;
             text-align: center;
             border: 4px solid var(--kbc-gold);
             box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5), 0 0 30px var(--kbc-neon);
             position: relative;
             overflow: hidden;
             color:gold;
+            max-height: 90vh;
+            overflow-y: auto;
         }
         
-        #${kbcInstanceId}-modal .modal-content::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            height: 4px;
-            background: linear-gradient(90deg, transparent, var(--kbc-gold), transparent);
-            animation: scan 2s infinite;
+        @media (min-width: 1200px) {
+             #${kbcInstanceId}-modal .modal-content {
+                max-width: 600px;
+             }
         }
 
         #${kbcInstanceId}-modal .modal-title {
-            font-size: 1.8rem;
+            font-size: 1.5rem;
             font-weight: bold;
             margin-bottom: 16px;
             color: gold;
             text-shadow: 0 0 10px var(--kbc-gold);
+            line-height: 1.3;
         }
         
         #${kbcInstanceId}-modal .modal-body {
             margin-bottom: 24px;
-            font-size: 1.125rem;
+            font-size: 1.1rem;
             color: white;
-            line-height: 1.5;
+            line-height: 1.6;
         }
 
         #${kbcInstanceId}-modal .audience-poll-graph {
             color: white;
-            margin: 16px 0;
-            height: 120px;
+            margin: 20px 0;
+            height: 140px;
             display: none;
             justify-content: space-around;
             align-items: flex-end;
@@ -373,17 +479,27 @@ function startKBC(data,title) {
 
         #${kbcInstanceId}-modal .modal-buttons {
             display: flex;
-            justify-content: center;
-            gap: 16px;
+            flex-direction: column;
+            gap: 12px;
+        }
+        
+        @media (min-width: 480px) {
+            #${kbcInstanceId}-modal .modal-buttons {
+                flex-direction: row;
+                justify-content: center;
+            }
         }
 
         #${kbcInstanceId}-modal .modal-btn {
-            padding: 12px 24px;
+            padding: 14px 20px;
             border-radius: 8px;
             font-weight: bold;
             transition: all 0.3s ease;
             cursor: pointer;
             border: none;
+            font-size: 1rem;
+            flex: 1;
+            touch-action: manipulation;
         }
         
         #${kbcInstanceId}-modal .modal-primary-btn {
@@ -408,78 +524,7 @@ function startKBC(data,title) {
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
         }
 
-        #${kbcInstanceId} .options-container {
-            display: grid;
-            grid-template-columns: 1fr;
-            gap: 16px;
-            width: 100%;
-        }
-        
-        @media (min-width: 640px) {
-            #${kbcInstanceId} .options-container {
-                grid-template-columns: 1fr 1fr;
-            }
-        }
-
-        #${kbcInstanceId} .money-tree {
-            display: flex;
-            flex-direction: column-reverse;
-            gap: 4px;
-        }
-
-        /* Timer Styles */
-        #${kbcInstanceId} .timer-container {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            margin-bottom: 16px;
-            position: relative;
-        }
-
-        #${kbcInstanceId} .timer-label {
-            color: var(--kbc-gold);
-            font-weight: bold;
-            margin-bottom: 8px;
-            font-size: 1.1rem;
-        }
-
-        #${kbcInstanceId} .timer-circle {
-            position: relative;
-            width: 80px;
-            height: 80px;
-            border-radius: 50%;
-            background: conic-gradient(
-                var(--kbc-neon) 0deg,
-                var(--kbc-neon) var(--timer-progress, 360deg),
-                rgba(255, 255, 255, 0.1) var(--timer-progress, 360deg)
-            );
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            box-shadow: 0 0 15px rgba(0, 188, 212, 0.5);
-        }
-
-        #${kbcInstanceId} .timer-inner {
-            position: absolute;
-            width: 70px;
-            height: 70px;
-            border-radius: 50%;
-            background-color: var(--kbc-dark);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
-
-        #${kbcInstanceId} .timer-text {
-            color: white;
-            font-size: 1.5rem;
-            font-weight: bold;
-        }
-
-        #${kbcInstanceId} .timer-warning {
-            animation: pulse-warning 1s infinite;
-        }
-
+        /* --- ANIMATIONS --- */
         @keyframes pulse-border {
             0% { border-color: var(--kbc-gold); box-shadow: 0 0 10px var(--kbc-neon), 0 0 5px var(--kbc-gold); }
             100% { border-color: var(--kbc-neon); box-shadow: 0 0 20px var(--kbc-neon), 0 0 10px var(--kbc-gold); }
@@ -496,15 +541,14 @@ function startKBC(data,title) {
             75% { transform: translateX(5px); }
         }
         
-        @keyframes scan {
-            0% { transform: translateX(-100%); }
-            100% { transform: translateX(100%); }
+        @keyframes pulse-warning {
+            0% { transform: scale(1); box-shadow: 0 0 0 0 rgba(244, 67, 54, 0.7); }
+            70% { transform: scale(1.1); box-shadow: 0 0 0 10px rgba(244, 67, 54, 0); }
+            100% { transform: scale(1); box-shadow: 0 0 0 0 rgba(244, 67, 54, 0); }
         }
         
-        @keyframes pulse-warning {
-            0% { transform: scale(1); }
-            50% { transform: scale(1.1); }
-            100% { transform: scale(1); }
+        #${kbcInstanceId} .timer-warning {
+            animation: pulse-warning 1s infinite;
         }
     `;
     document.head.appendChild(style);
@@ -528,25 +572,13 @@ function startKBC(data,title) {
     <div id="${kbcInstanceId}" class="kbc-container">
         <!-- GAME AREA (Center Hot Seat) -->
         <div class="game-area">
-            <!-- LIFELINES (Top Bar) -->
-            <div class="lifelines">
-                <button id="lifeline-5050" class="lifeline-btn" title="ਪੰਜਾਹ-ਪੰਜਾਹ">
-                    <i class="fas fa-divide" style="font-size: 1.5rem;"></i>
-                </button>
-                <button id="lifeline-audience" class="lifeline-btn" title="ਦਰਸ਼ਕਾਂ ਦੀ ਰਾਏ">
-                    <i class="fas fa-users" style="font-size: 1.5rem;"></i>
-                </button>
-                <button id="lifeline-expert" class="lifeline-btn" title="ਮਾਹਰ ਦੀ ਸਲਾਹ">
-                    <i class="fas fa-user-tie" style="font-size: 1.5rem;"></i>
-                </button>
-            </div>
 
             <!-- HOT SEAT / QUESTION DISPLAY -->
             <div class="hot-seat">
             
                 <!-- TIMER -->
                 <div class="timer-container">
-                    <div class="timer-label">ਸਮਾਂ</div>
+                    
                     <div class="timer-circle" id="${kbcInstanceId}-timer-circle">
                         <div class="timer-inner">
                             <div class="timer-text" id="${kbcInstanceId}-timer-text">30</div>
@@ -556,7 +588,7 @@ function startKBC(data,title) {
 
                 <!-- QUESTION BOX -->
                 <div class="question-box">
-                    <p id="current-question-text" style="font-size: 1.25rem; font-weight: bold; line-height: 1.5;">ਖੇਡ ਸ਼ੁਰੂ ਕਰਨ ਲਈ ਤਿਆਰ ਹੋ ਜਾਓ!</p>
+                    <p id="current-question-text" style="font-weight: bold; line-height: 1.5;">ਖੇਡ ਸ਼ੁਰੂ ਕਰਨ ਲਈ ਤਿਆਰ ਹੋ ਜਾਓ!</p>
                 </div>
 
                 <!-- OPTIONS -->
@@ -566,17 +598,28 @@ function startKBC(data,title) {
                 
                 <!-- EXPLANATION BOX (Hidden by default) -->
                 <div id="explanation-container" class="explanation-box" style="display: none;">
-                    <div class="explanation-title">ਵਿਆਖਿਆ:</div>
+                    <span class="explanation-title">ਵਿਆਖਿਆ:</span>
                     <p id="explanation-text"></p>
                 </div>
             </div>
+    
+                <!-- LIFELINES (Top Bar) -->
+            <div class="lifelines">
+                <button id="lifeline-5050" class="lifeline-btn" title="ਪੰਜਾਹ-ਪੰਜਾਹ">
+                    <i class="fas fa-divide" style="font-size: 1.2rem;"></i>
+                </button>
+                <button id="lifeline-audience" class="lifeline-btn" title="ਦਰਸ਼ਕਾਂ ਦੀ ਰਾਏ">
+                    <i class="fas fa-users" style="font-size: 1.2rem;"></i>
+                </button>
+                <button id="lifeline-expert" class="lifeline-btn" title="ਮਾਹਰ ਦੀ ਸਲਾਹ">
+                    <i class="fas fa-user-tie" style="font-size: 1.2rem;"></i>
+                </button>
+            </div>
+
         </div>
 
-        <!-- MONEY TREE (Right Panel on Desktop, Top on Mobile) -->
+        <!-- MONEY TREE (Horizontal on mobile, Right Panel on Desktop) -->
         <div class="money-tree-container">
-            <h2 style="font-size: 1.25rem; font-weight: bold; text-align: center; margin-bottom: 1rem; color: white; text-transform: uppercase; letter-spacing: 0.05em; border-bottom: 1px solid var(--kbc-gold); padding-bottom: 0.5rem;">
-                ਰਕਮ ਦਾ ਚਾਰਟ
-            </h2>
             <div id="money-tree" class="money-tree">
                 <!-- Money items will be populated here -->
             </div>
@@ -860,13 +903,19 @@ if (heading) {
         const currentItem = document.getElementById(`${kbcInstanceId}-money-level-${level}`);
         if (currentItem) {
             currentItem.classList.add('current');
+            
+            // RESPONSIVE FIX: Auto-scroll to current level on mobile (horizontal layout)
+            if (window.innerWidth <= 992) {
+                currentItem.scrollIntoView({
+                    behavior: 'smooth',
+                    block: 'nearest',
+                    inline: 'center'
+                });
+            }
         }
     }
 
     function loadQuestion(index) {
-        // --- CHANGE 2: REMOVED THE WIN CONDITION CHECK FROM HERE ---
-        // The win condition is now handled cleanly in `lockAnswer`.
-        
         currentQuestionIndex = index;
         selectedOptionIndex = null;
         isLocked = false;
@@ -1024,8 +1073,7 @@ if (heading) {
             explanationText.textContent = currentQ.explanation_pa;
             explanationContainer.style.display = 'block';
             
-            // --- CHANGE 1: MODIFIED LOGIC FOR CORRECT ANSWER ---
-            // Wait for animation, then check if it's the final question.
+            // Logic for correct answer
             setTimeout(() => {
                 // Check if this is the last question (15th question, index 14)
                 if (currentQuestionIndex === 14) {
@@ -1363,4 +1411,4 @@ if (heading) {
 
     // Initial Game Start
     startGameFlow();
-}
+        }
