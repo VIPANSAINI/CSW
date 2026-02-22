@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="pa">
+<head>
+  <meta charset="UTF-8">
+  <title>Offline</title>
+  <style>
+    body {
+      font-family: "Comic Sans MS", "Baloo Paaji 2", cursive, sans-serif;
+      text-align: center;
+      margin: 0;
+      padding: 0;
+      background: linear-gradient(to right, #ffddff, #eeffee);
+     height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      flex-direction: column;
+    }
+    h1 {
+      font-size: 2.5em;
+      color: orangered;
+      margin-bottom: 20px;
+      animation: bounce 1.5s infinite;
+    }
+    p {
+      font-size: 1.2em;
+      color: #333;
+      background: #fff;
+      padding: 10px 20px;
+      border-radius: 20px;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+      margin-bottom: 30px;
+    }
+    .cloud {
+      width: 100px;
+      height: 60px;
+      background: #fff;
+      border-radius: 50px;
+      position: relative;
+      display: inline-block;
+      margin: 10px;
+      animation: float 4s ease-in-out infinite;
+    }
+    .cloud:before, .cloud:after {
+      content: "";
+      position: absolute;
+      background: #fff;
+      width: 80px;
+      height: 80px;
+      border-radius: 50%;
+      top: -20px;
+      left: 10px;
+    }
+    .cloud:after {
+      width: 60px;
+      height: 60px;
+      top: -10px;
+      left: 50px;
+    }
+    @keyframes bounce {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-10px); }
+    }
+    @keyframes float {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-15px); }
+    }
+    .retry-btn {
+      background: lightseagreen;
+      color: white;
+      font-size: 1.2em;
+      border: none;
+      padding: 12px 25px;
+      border-radius: 25px;
+      cursor: pointer;
+      box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+      transition: background 0.3s, transform 0.2s;
+    }
+    .retry-btn:hover {
+      background: #e91e63;
+      transform: scale(1.1);
+    }
+  </style>
+</head>
+<body>
+  <div class="cloud"></div>
+  <div class="cloud" style="animation-delay:1s;"></div>
+  
+  <h1>ਇੰਟਰਨੈੱਟ ਨਹੀਂ ਹੈ</h1>
+  <p style="color:purple;">ਚਿੰਤਾ ਨਾ ਕਰੋ ! <br> ਤੁਸੀਂ ਬਾਅਦ ਵਿੱਚ ਦੁਬਾਰਾ ਕੋਸ਼ਿਸ਼ ਕਰ ਸਕਦੇ ਹੋ।</p>
+  
+  <button class="retry-btn" onclick="location.reload()"> ਦੁਬਾਰਾ ਕੋਸ਼ਿਸ਼ ਕਰੋ</button>
+</body>
+</html>

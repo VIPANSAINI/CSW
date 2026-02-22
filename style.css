@@ -1,0 +1,525 @@
+/* style.css */
+
+/* --- Generated Tailwind CSS Utilities (from your HTML) --- */
+*, ::before, ::after { box-sizing: border-box; border-width: 0; border-style: solid; border-color: #e5e7eb; }
+html { line-height: 1.5; -webkit-text-size-adjust: 100%; -moz-tab-size: 4; tab-size: 4; font-family: Inter, sans-serif; font-feature-settings: normal; font-variation-settings: normal; -webkit-tap-highlight-color: transparent; }
+body { margin: 0; line-height: inherit; }
+h3 { font-size: inherit; font-weight: inherit; }
+a { color: inherit; text-decoration: inherit; }
+button { font-family: inherit; font-size: 100%; font-weight: inherit; line-height: inherit; color: inherit; margin: 0; padding: 0; text-transform: none; background-color: transparent; background-image: none; cursor: pointer; }
+img { display: block; vertical-align: middle; max-width: 100%; height: auto; }
+svg { display: block; vertical-align: middle; }
+.container { width: 100%; margin-right: auto; margin-left: auto; padding-right: 1.5rem; padding-left: 1.5rem; }
+@media (min-width: 640px) { .container { max-width: 640px; } }
+@media (min-width: 768px) { .container { max-width: 768px; } }
+@media (min-width: 1024px) { .container { max-width: 1024px; } }
+@media (min-width: 1280px) { .container { max-width: 1280px; } }
+@media (min-width: 1536px) { .container { max-width: 1536px; } }
+.fixed { position: fixed; }
+.top-0 { top: 0px; }
+.right-0 { right: 0px; }
+.left-0 { left: 0px; }
+.z-50 { z-index: 50; }
+.mx-auto { margin-left: auto; margin-right: auto; }
+.mt-4 { margin-top: 1rem; }
+.mr-2 { margin-right: 0.5rem; }
+.inline-block { display: inline-block; }
+.flex { display: flex; }
+.hidden { display: none; }
+.flex-col { flex-direction: column; }
+.items-center { align-items: center; }
+.justify-between { justify-content: space-between; }
+.space-x-8 > :not([hidden]) ~ :not([hidden]) { --tw-space-x-reverse: 0; margin-right: calc(2rem * var(--tw-space-x-reverse)); margin-left: calc(2rem * calc(1 - var(--tw-space-x-reverse))); }
+.space-y-4 > :not([hidden]) ~ :not([hidden]) { --tw-space-y-reverse: 0; margin-top: calc(1rem * calc(1 - var(--tw-space-y-reverse))); margin-bottom: calc(1rem * var(--tw-space-y-reverse)); }
+.rounded-sm { border-radius: 0.125rem; }
+.rounded-md { border-radius: 0.375rem; }
+.rounded-lg { border-radius: 0.5rem; }
+.bg-white\/80 { background: linear-gradient(90deg, #031273,#6960ec , #031273); }
+.p-2 { padding: 0.5rem; }
+.p-3 { padding: 0.75rem; }
+.px-1 { padding-left: 0.25rem; padding-right: 0.25rem; }
+.py-1 { padding-top: 0.25rem; padding-bottom: 0.25rem; }
+.px-6 { padding-left: 1.5rem; padding-right: 1.5rem; }
+.py-4 { padding-top: 1rem; padding-bottom: 1rem; }
+.py-10 { padding-top: 2.5rem; padding-bottom: 2.5rem; }
+.pt-12 { padding-top: 3rem; }
+.pb-2 { padding-bottom: 0.5rem; }
+.text-center { text-align: center; }
+.text-2xl { font-size: 1.5rem; line-height: 2rem; }
+.font-bold { font-weight: 700; }
+.text-gray-600 { color: gold; }
+.text-gray-800 { color: #1f2937; }
+.shadow-md { box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -2px rgba(0, 0, 0, 0.1); }
+.backdrop-blur-lg { backdrop-filter: blur(16px); }
+.transition-all { transition-property: all; transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1); transition-duration: 150ms; }
+.transition-colors { transition-property: color, background-color, border-color, text-decoration-color, fill, stroke; transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1); transition-duration: 150ms; }
+.duration-300 { transition-duration: 300ms; }
+.antialiased { -webkit-font-smoothing: antialiased; -moz-osx-font-smoothing: grayscale; }
+.scroll-smooth { scroll-behavior: smooth; }
+.hover\:bg-gray-100:hover { background-color: #031273; }
+.hover\:text-blue-500:hover { color: #3b82f6; }
+.focus\:outline-none:focus { outline: 2px solid transparent; outline-offset: 2px; }
+@media (min-width: 768px) {
+  .md\:flex { display: flex; }
+  .md\:hidden { display: none; }
+}
+
+
+
+.ws {
+  
+  justify-content: center;
+  align-items: center;
+  
+}
+
+
+    /* Style for the active navigation link */
+        .nav-link.active {
+            color: white; /* Blue-500 */
+            font-weight: 600;
+            position: relative;
+        }
+        .nav-link.active::after {
+            content: '';
+            position: absolute;
+            bottom: -8px;
+            left: 0;
+            right: 0;
+            height: 3px;
+            background-color: #3b82f6;
+            border-radius: 2px;
+        }
+        /* Fade-in animation for content */
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        .content-fade-in {
+            animation: fadeIn 0.5s ease-in-out;
+        }
+.logo {
+  
+  font-size: 1.5rem;
+  
+  align-self: center;
+  background: linear-gradient(135deg, gold,yellow , white);
+  background-size: 200% auto;
+  color: transparent;
+  -webkit-background-clip: text;
+  background-clip: text;
+  animation: gradient 3s linear infinite;
+}
+
+@keyframes gradient {
+  0% { background-position: 0% center; }
+  100% { background-position: 200% center; }
+}
+    
+    .worksheet-selection {
+  margin-top:.1rem;
+  padding: 1rem 0;
+}
+
+.worksheet-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+  gap: 1.5rem;
+}
+
+.worksheet-card {
+    background-color:white;
+  border-top:6px outset gold;
+  border-radius: 20px;
+  padding: 1.5rem;
+  box-shadow: 0 2px 10px gold;
+  text-align: center;
+  transition: transform 0.3s ease;
+}
+
+.worksheet-card:hover {
+  transform: translateY(-5px);
+}
+
+.worksheet-card i {
+  font-size: 1.5rem;
+  color: darkblue;
+  margin-bottom:.5rem;
+}
+
+.worksheet-card h3 {
+  font-size: 1.2rem;
+  margin-bottom: 0.1rem;
+  
+}
+.panel {
+  
+  padding: 3px 3px;
+  background-color: white;
+  display: none;
+  overflow: hidden;
+  
+}
+.accordion {
+  /* --- Sizing and Layout --- */
+  min-width: 50%;
+  margin: 15px;
+  padding: 0.2em.4em; /* Slightly more padding for a softer look */
+  position: relative;
+  cursor: pointer;
+  outline: none;
+  
+  /* --- Colors & Background --- */
+  /* Cheerful gradient background */
+  background: linear-gradient(135deg,brown, blue); 
+  color: white;
+  
+  /* --- Font --- */
+  font-family: 'Arial', sans-serif; /* A simple, readable font */
+  font-weight: bold;
+  font-size: 1.2rem; /* Slightly larger for better readability */
+  text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.2); /* Makes text pop */
+  
+  /* --- Shape & Border --- */
+  border: none;
+  border-radius: 50px; /* Fully rounded for a pill/bubble shape */
+  /* Soft shadow to lift the button off the page */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+  
+  /* --- Smooth Animations --- */
+  transition: all 0.2s ease-in-out;
+
+  /* --- User Interaction Helpers --- */
+  user-select: none;
+  -webkit-user-select: none;
+  touch-action: manipulation;
+}
+
+/* --- Interaction States --- */
+
+.accordion:hover {
+  /* Make it brighter and lift it up on hover */
+  background: linear-gradient(135deg,blue, brown);
+  transform: translateY(-3px); /* Lifts the button slightly */
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
+}
+
+.accordion:active {
+  /* Make it look like it's being pressed down */
+  transform: translateY(1px); /* Pushes the button down */
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.15);
+}
+
+.accordion .accordion-icon {
+  color:orange;
+  float: right;
+  transition: transform 0.3s ease-in-out;
+  font-size: 1.5rem;
+  line-height: 1; /* Aligns the '+' vertically */
+}
+
+/* When the accordion is active, rotate the icon */
+.accordion.active .accordion-icon {
+  transform: rotate(45deg); /* Turns the '+' into an 'x' */
+}
+
+.class-grid {
+      
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 10px;
+        margin-top: 2px;
+    }
+    
+    .class-button {
+      
+        padding: 1px 1px;
+        
+        text-align: center;
+        border-radius: 6px;
+  cursor: pointer;
+        transition: all 0.2s;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        
+    }
+    
+    .class-button:hover {
+         transform: translateY(-2px);
+        box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    }
+    
+    .class-button:active {
+        transform: translateY(0);
+    }
+    
+    
+    
+    /* Responsive adjustments */
+    @media (max-width: 480px) {
+        .class-grid {
+            grid-template-columns: repeat(2, 1fr);
+        }
+        
+        .class-button {
+            font-size: 20px;
+            padding: 1px 1px;
+        }
+    }
+
+.animated-text {
+    font-weight: bold;
+    font-size: 1.2rem;
+    text-align: center;
+    padding: .2rem 0;
+    animation: color-change 2s infinite alternate;
+}
+
+@keyframes color-change {
+    from { color: brown; }
+    to { color: orangered; }
+}
+
+  
+
+.wsselect {
+  /* --- Sizing and Layout --- */
+  min-width: 50%;
+  margin: 1px;
+  padding: 0.4em .6em;
+  position: relative;
+  cursor: pointer;
+  outline: none;
+  
+  /* --- Colors & Background --- */
+  background-color: #031273; /* A bright, friendly green */
+  color: white;
+
+  /* --- Font --- */
+  font-weight: bold;
+  font-size: 1rem;
+   /* A little extra spacing for fun */
+  /* --- Shape & Border --- */
+  border: none;
+  border-radius: 10px; /* Rounded corners, but still blocky */
+  /* This darker bottom border creates the 3D effect */
+  border-bottom: 3px solid gold;
+    /* --- Smooth Animations --- */
+  transition: all 0.15s ease-out;
+
+  /* --- User Interaction Helpers --- */
+  user-select: none;
+  -webkit-user-select: none;
+  touch-action: manipulation;
+}
+
+/* --- Interaction States --- */
+
+.wsselect:hover {
+  /* Slightly brighter on hover */
+  background-color: goldenrod;
+  
+
+  /* Move it up slightly to invite a click */
+  transform: translateY(-2px);
+  border-bottom: 3px solid #031273;
+  border-bottom-width: 3px; /* Make the shadow seem larger */
+}
+
+.wsselect:active {
+  /* The "press down" effect */
+  transform: translateY(4px); /* Moves the button down into the space */
+  border-bottom: 3px solid #27ae60; /* The border shrinks, completing the illusion */
+}
+
+.wshead {
+  font-family: 'Poppins', sans-serif;
+  font-weight: 700;
+  font-size: 1rem;
+  margin: 0;
+  
+  align-self: center;
+  background: linear-gradient(90deg, yellow, white, yellow);
+  background-size: 200% auto;
+  color: transparent;
+  -webkit-background-clip: text;
+  background-clip: text;
+  animation: gradient1 3s linear infinite;
+}
+
+@keyframes gradient1 {
+  0% { background-position: 0% center; }
+  100% { background-position: 100% center; }
+}
+.install-btn {
+  position: fixed;
+  bottom: 10px;
+  right: 10px;
+  padding: 6px 8px;
+  background: orangered;   /* corrected color name */
+  color: white;
+  border-radius: 20px;
+  font-size: 12px;
+  font-weight: bold;
+  cursor: pointer;
+  z-index: 2000;
+
+  /* Animation */
+  animation: zoomInOut 1.5s infinite;
+}
+
+@keyframes zoomInOut {
+  0% { transform: scale(1); }
+  50% { transform: scale(1.2); }
+  100% { transform: scale(1); }
+}
+.profile-pic {
+    margin-top:2rem;
+  margin-bottom:2rem;
+    width: 150px;
+    height: 150px;
+    border-radius: 50%;
+    border: 5px solid lightseagreen;
+    box-shadow: 0 0 20px rgba(0, 123, 255, 0.7);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+  }
+
+  .profile-pic:hover {
+    transform: scale(1.1);
+    box-shadow: 0 0 30px rgba(255, 0, 0, 0.7);
+  }
+
+
+
+nav ul li {
+  
+  margin-right: 10px;
+}
+
+nav ul li a {
+  
+  color: white;
+  text-decoration: none;
+  font-weight: bold;
+}
+
+nav ul li a:hover {
+  text-decoration: underline;
+}
+.headerqt {
+  width:75%;
+  justify-content: center;
+  text-align: center;
+  margin: px auto;
+  padding: 15px 25px;
+  background:linear-gradient(135deg, #fefdfa, #ffebef);
+  border-radius: 16px;
+  border: 2px solid #7b1fa2;
+  box-shadow: 0 6px 20px rgba(123, 31, 162, 0.3);
+  font-size: 20px;
+  color: #4a0072;
+  font-weight: bold;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  letter-spacing: 1px;
+  text-shadow: 1px 1px 2px #ffffff;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.headerqt:hover {
+  transform: scale(1.03);
+  box-shadow: 0 8px 25px rgba(123, 31, 162, 0.4);
+}
+.tree ul {list-style: none; padding-left: 20px; }
+    .tree li { margin: 10px 0;font-size:20px }
+    .tree label { cursor: pointer; font-weight: bold; color: #2e7d32;border-left:4px outset green;}
+    .tree button {
+      font-size: 15px;
+      background: #ccddcc;
+      border-bottom: 2px solid brown;
+      padding: 4px 7px;
+      margin: 3px 0;
+      border-radius: 6px;
+      cursor: pointer;
+      font-weight: bold;
+      width:100%;
+      max-width: 500px;
+      color: green;
+    }
+    .tree input[type="checkbox"] { display: none; }
+    .tree input[type="checkbox"] ~ ul { display: none; }
+    .tree input[type="checkbox"]:checked ~ ul { display: block; }
+
+
+
+    .question-block {
+      margin: 15px 0;
+      padding: 10px;
+      background: #e0f7fa;
+      border-radius: 8px;
+      border: 1px solid purple;
+    }
+
+    .question-text { font-size: 16px; color:purple; margin-bottom: 8px;font-weight:bold; }
+    .options-row { display: flex; gap: 10px; margin-bottom: 5px; }
+    .option { flex: 1; background: #edfefe; padding: 5px; border-radius: 5px;font-weight:bold;font-size: 15px;white-space: pre-line; }
+    .answer { color: red; font-weight: bold; margin-top: 5px;font-size: 16px;}
+   .section-heading {font-size: 1em;font-weight: bold;color: white;margin-bottom:.5em;text-align: center;background-color: #6573B5;padding: 10px;border-radius: 8px;box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);}
+  .lesson-heading {border:4px outset brown;font-size: 1.2em;font-weight: bold;color: brown;margin-bottom:.5em;margin-top:2em;text-align: center;background:linear-gradient(to right, #ffe8a8, #efcbfb);padding: 10px;border-radius: 8px;box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);width:100%;}
+.answer-image {
+  max-width: 100%;
+  height: auto;
+  margin-top: 10px;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+}
+.question-block1 {
+  display: flex;
+  justify-content: space-between;
+  margin: 15px 0;
+      padding: 10px;
+      background: #e0f7fa;
+      border-radius: 8px;
+      border: 1px solid purple;
+}
+
+
+
+.question-col {
+  width: 25%;
+  color:purple;
+  font-weight: bold;
+}
+
+.answer-col {
+  width: 75%;
+  font-weight: bold;
+  color:red;
+  text-align: right;
+}
+.question-col1 {
+  width: 70%;
+  color:purple;
+  font-weight: bold;
+}
+
+.answer-col1{
+  width: 30%;
+  font-weight: bold;
+  color:red;
+  text-align: right;
+}
+
+
+.mhead
+{
+  color:purple;font-weight:bold;padding:1px;
+  border-bottom:outset 3px gold;border-top:outset 3px yellow;border-left:outset 4px gold;border-right:outset 4px yellow;border-radius:10px;background:lightcyan;  box-shadow: 3px 3px 10px rgba(65,44,56,0.7); /* shadow */
+  max-width: 600px;
+  align-self: center;
+  width: 100%;
+  align-content: center;
+  transform: perspective(600px) rotateX(20deg);
+  margin:0 auto;
+  
+}

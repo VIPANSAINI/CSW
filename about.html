@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Play & Learn</title>
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+    
+    <link rel="stylesheet" href="style.css">
+    
+    <style>
+        .social-icons {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            margin-bottom: 15px;
+            flex-wrap: wrap;
+        }
+        
+        .social-icon {
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        }
+        
+        .social-icon:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3);
+        }
+        
+        .whatsapp-icon {
+            background-color: #25D366;
+        }
+        
+        .youtube-icon {
+            background-color: #FF0000;
+        }
+        
+        .instagram-icon {
+            background: linear-gradient(45deg, #f09433 0%,#e6683c 25%,#dc2743 50%,#cc2366 75%,#bc1888 100%);
+        }
+        
+        .facebook-icon {
+            background-color: #1877F2;
+        }
+        
+        .social-icon i {
+            color: white;
+            font-size: 30px;
+        }
+        
+        .social-icon-text {
+            color: white;
+            font-size: 12px;
+            font-weight: bold;
+            margin-top: 5px;
+        }
+        
+        .icon-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+            100% { transform: scale(1); }
+        }
+        
+        .pulse-animation {
+            animation: pulse 2s infinite;
+        }
+        
+        @media (max-width: 480px) {
+            .social-icons {
+                gap: 10px;
+            }
+            .social-icon {
+                width: 50px;
+                height: 50px;
+            }
+            .social-icon i {
+                font-size: 24px;
+            }
+        }
+    </style>
+</head>
+<body style="padding:5px;items-align:center;background: linear-gradient(to right, #212121, #031273);">
+
+    <header id="main-header" class="bg-white/80 backdrop-blur-lg shadow-md fixed top-0 left-0 right-0 z-50 transition-all duration-300" style="border-bottom:2px solid gold;">
+        <div class="container mx-auto px-6 py-4">
+            <div class="flex items-center justify-between">
+                <a href="index.html" class="text-2xl font-bold text-gray-800 hover:text-blue-500 transition-colors">
+                    <img src="logo.png" alt="Site Logo" width="40" height="40" class="inline-block mr-2 rounded-sm">
+                    <span class="logo">ਕੋਣ ਬਣੇਗਾ ਕਰੋੜਪਤੀ</span>
+                </a>
+
+                <nav class="hidden md:flex items-center space-x-8">
+                    <a href="index.html" class="nav-link text-gray-600 hover:text-blue-500 transition-colors pb-2" data-page="home">KBC</a>
+                     <a href="about.html" class="nav-link text-gray-600 hover:text-blue-500 transition-colors pb-2" data-page="about">About</a>
+                      </nav>
+
+                <button id="mobile-menu-button" class="md:hidden p-2 rounded-md text-gray-600 hover:bg-gray-100 focus:outline-none">
+                    <svg id="menu-open-icon" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <line x1="3" y1="12" x2="21" y2="12"></line>
+                        <line x1="3" y1="6" x2="21" y2="6"></line>
+                        <line x1="3" y1="18" x2="21" y2="18"></line>
+                    </svg>
+                    <svg id="menu-close-icon" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="hidden">
+                        <line x1="18" y1="6" x2="6" y2="18"></line>
+                        <line x1="6" y1="6" x2="18" y2="18"></line>
+                    </svg>
+                </button>
+            </div>
+
+            <div id="mobile-menu" class="hidden md:hidden mt-4">
+                <nav class="flex flex-col space-y-4">
+                    <a href="index.html" class="nav-link text-gray-600 hover:bg-gray-100 p-3 rounded-lg" data-page="home">KBC</a>
+                 <a href="about.html" class="nav-link text-gray-600 hover:bg-gray-100 p-3 rounded-lg" data-page="about">About</a>
+                     </nav>
+            </div>
+        </div>
+    </header>
+
+
+          <div id="instruction" style="margin-top:5rem;"class="mhead">
+        <div class="animated-text">ਮੇਰੇ ਬਾਰੇ</div>
+    </div>
+            <div class="ws">
+             <div align="center" class="ws-head">
+                 
+                 <!-- Social Media Icons -->
+
+                 
+    <img src="https://i.ibb.co/Nntz63md/1000227841.jpg" alt="Vipan Saini" class="profile-pic" />
+                 <span class="wshead"><b>ਵਿਪਨ ਸੈਣੀ (ਕੰਪਿਊਟਰ ਫੈਕਲਟੀ)<br>ਸ.ਸ.ਸ.ਸ ਰਾਮਪੁਰ ਜਗੀਰ , ਕਪੂਰਥਲਾ ।</b></span>
+    
+    <font color="gold" ><p style="font-weight:bold">📞 ਮੋਬਾਇਲ : 8284800816</p>
+    </font>
+
+    
+  </div>
+  <marquee><font color="purple" ><p style="font-weight:bold"><span class="wshead">ਪੰਜਾਬ ਸਕੂਲ ਸਿੱਖਿਆ ਬੋਰਡ ਦੇ ਛੇਵੀਂ ਜਮਾਤ ਤੋਂ ਬਾਰ੍ਹਵੀਂ ਜਮਾਤ ਦੇ ਵਿਦਿਆਰਥੀਆਂ ਦੇ ਮਨ ਵਿੱਚ ਪੜ੍ਹਾਈ ਸਬੰਧੀ ਰੋਚਕਤਾ ਪੈਦਾ ਕਰਨ ਲਈ ਮੇਰੇ ਵੱਲੋਂ ਇੱਕ ਛੋਟੀ ਜਹੀ ਪਹਿਲ।</span></p>
+   </marquee> 
+</div>
+        </div>
+    
+
+    <footer style="color:gold">
+                         <div class="social-icons">
+                     <div class="icon-container">
+                         <a href="https://whatsapp.com/channel/0029VbCaWtV4dTnBdQviIx2p" target="_blank" class="social-icon whatsapp-icon pulse-animation">
+                             <i class="fab fa-whatsapp"></i>
+                         </a>
+                         <span class="social-icon-text">WhatsApp</span>
+                     </div>
+                     <div class="icon-container">
+                         <a href="https://youtube.com/@vipansaini2501" target="_blank" class="social-icon youtube-icon pulse-animation">
+                             <i class="fab fa-youtube"></i>
+                         </a>
+                         <span class="social-icon-text">YouTube</span>
+                     </div>
+                     <div class="icon-container">
+                         <a href="https://www.instagram.com/saini_vip?igsh=MTB5MXE0eDZxcmhybw==" target="_blank" class="social-icon instagram-icon pulse-animation">
+                             <i class="fab fa-instagram"></i>
+                         </a>
+                         <span class="social-icon-text">Instagram</span>
+                     </div>
+                     <div class="icon-container">
+                         <a href="https://www.facebook.com/COMPUTERSCIENCEWALA" target="_blank" class="social-icon facebook-icon pulse-animation">
+                             <i class="fab fa-facebook-f"></i>
+                         </a>
+                         <span class="social-icon-text">Facebook</span>
+                     </div>
+                 </div>
+        <div class="container mx-auto px-1 py-1 text-center">
+            <p>&copy; 2026  &nbsp  cswala@netlify.app <br> All Rights Reserved.</p>
+             
+        </div>
+    </footer>
+    
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const navLinks = document.querySelectorAll('.nav-link');
+            const mobileMenuButton = document.getElementById('mobile-menu-button');
+            const mobileMenu = document.getElementById('mobile-menu');
+            const menuOpenIcon = document.getElementById('menu-open-icon');
+            const menuCloseIcon = document.getElementById('menu-close-icon');
+
+            // --- Logic to highlight the active link based on the current URL ---
+            const currentPage = window.location.pathname.split("/").pop();
+
+            navLinks.forEach(link => {
+                // Get the file name from the link's href
+                const linkPage = link.getAttribute('href').split("/").pop();
+
+                // Check for the home page (which can be '' or 'index.html')
+                if (linkPage === currentPage || (currentPage === '' && linkPage === 'index.html')) {
+                    link.classList.add('active');
+                }
+            });
+
+            // --- Logic to toggle the mobile menu ---
+            mobileMenuButton.addEventListener('click', () => {
+                mobileMenu.classList.toggle('hidden');
+                menuOpenIcon.classList.toggle('hidden');
+                menuCloseIcon.classList.toggle('hidden');
+            });
+
+            // Note: A click listener for the nav-links is no longer needed,
+            // as the browser's default behavior of navigating to the href is what we want.
+        });
+    </script>
+</body>
+</html>
